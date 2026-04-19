@@ -4,8 +4,6 @@ def generate():
     st.title("Story Generator")
 
     genre = st.text_input("What genre do you want the story to be about?")
-    gender = st.radio("Gender", ["Boy", "Girl"])
-    age = st.slider("Enter Age")
     learn = st.text_input("What topic would you like to learn or get better at?")
 
     if st.button("Submit", key="generate_button"):

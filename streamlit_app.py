@@ -27,6 +27,10 @@ def initialize_state():
         st.session_state['initial_story'] = []
     if 'genre' not in st.session_state:
         st.session_state['genre'] = ""
+    if 'gender' not in st.session_state:
+        st.session_state['gender'] = ""
+    if 'age' not in st.session_state:
+        st.session_state['age'] = ""
 
 initialize_state()
 

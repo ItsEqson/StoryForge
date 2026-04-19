@@ -1,11 +1,12 @@
 import streamlit as st
 
 def onboarding():
-
-    name = st.text_input("Enter you name")
-    email = st.text_input("Enter Email")
-    Gender = st.radio("Gender", ["Boy", "Girl"])
-    age = st.slider("Enter Age")
-    if st.form_submit_button("Submit"):
-        st.session_state["needs_onboarding"] = False
-        st.rerun
+    with st.form("onboarding_form"):
+        name = st.text_input("Enter your name")
+        email = st.text_input("Enter Email")
+        Gender = st.radio("Gender", ["Boy", "Girl"])
+        age = st.slider("Enter Age")
+        submitted = st.form_submit_button("Submit")
+        if submitted:
+            st.session_state["needs_onboarding"] = False
+            st.rerun()

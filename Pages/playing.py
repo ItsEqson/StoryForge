@@ -63,15 +63,16 @@ Return only valid JSON.
             if st.button(choice, key=f"choice_{i}"):
                 st.session_state["last_choice"] = choice
                 st.success(f"You chose: {choice}")
+                if st.session_state["turn_count"] < 2:
+                    st.session_state["turn_count"] += 1
+
+                    if "game_data" in st.session_state:
+                        del st.session_state["game_data"]
     else:
         st.write("No choices available.")
 
     if st.session_state["turn_count"] < 2:
-        if st.button("Continue Story", key="continue_story"):
-            st.session_state["turn_count"] += 1
+        st.session_state["turn_count"] += 1
 
-            if "game_data" in st.session_state:
-                del st.session_state["game_data"]
-
-
-playing()
+        if "game_data" in st.session_state:
+            del st.session_state["game_data"]
