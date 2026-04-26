@@ -15,6 +15,8 @@ def initialize_state():
         st.session_state['user_db'] = {"Eqson": "SkinLake25"}
     if 'needs_onboarding' not in st.session_state:
         st.session_state["needs_onboarding"] = False
+    if 'current_user_id' not in st.session_state:
+        st.session_state['current_user_id'] = None
     if 'stage' not in st.session_state:
         st.session_state['stage'] = "None" # setup stage, playing stage, boss stages, end stage
     if 'turn_count' not in st.session_state:
@@ -56,6 +58,7 @@ def login():
             else:
                 st.session_state['logged_in'] = True
                 st.session_state['current_user'] = username
+                st.session_state['current_user_id'] = user.id
                 st.rerun()
 
 
@@ -79,6 +82,7 @@ def signup():
                 st.session_state['logged_in'] = True
                 st.session_state["needs_onboarding"] = True
                 st.session_state['current_user'] = username
+                st.session_state['current_user_id'] = user.id
                 st.rerun()
 
 

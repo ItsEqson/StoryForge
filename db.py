@@ -59,12 +59,18 @@ def sign_out():
 # ------------------------------------------------------------------ #
 
 def save_profile(user_id: str, data: dict):
-    """Upsert onboarding answers for this user."""
+    """Upsert onboarding answers for this user. data should contain: name, email."""
     sb = get_supabase()
-    sb.table("profiles").upsert({"id": user_id, **data}).execute()
+    sb.table("profiles").upsert({"user_id": user_id, **data}).execute()
 
 def get_profile(user_id: str):
-    """Return the profile row, or None if it doesn't exist yet."""
+    """Return the profile row by auth UUID, or None if it doesn't exist yet."""
     sb = get_supabase()
-    res = sb.table("profiles").select("*").eq("id", user_id).maybe_single().execute()
+    res = sb.table("profiles").select("*").eq("user_id", user_id).maybe_single().execute()
     return res.data          # dict or None
+
+def save_game_session(data: dict):
+    """Insert a new game session row. Accepted fields: genre, learn, turn_count, history, current_chapter, initial_story."""
+    sb = get_supabase()
+    res = sb.table("game_sessions").insert(data).execute()
+    return res.data
