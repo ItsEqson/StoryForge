@@ -1,10 +1,13 @@
 import streamlit as st
+from Pages.boss_fight import boss_fight
 from Pages.playing import playing
 from Pages.generate import generate
 from Pages.home import home
 from Pages.onboarding import onboarding
 from db import sign_up, sign_in, sign_out, get_profile
 # from supabase import create_client, Client
+
+st.image("StoryForgeLogo.png", width=200)
 
 def initialize_state():
     if 'logged_in' not in st.session_state:
@@ -69,14 +72,13 @@ def logout():
 def signup():
     with st.form("sign_up"):
         st.header("Sign Up")
-        username = st.text_input("Enter Username")
+        username = st.text_input("Enter email")
         password = st.text_input("Enter Password", type = "password")
-        password_check = st.text_input("Enter Password Again")
 
         if st.form_submit_button("Submit"):
             user, error = sign_up(username, password)
             if error:
-                st.error("Password doesn't match")
+                st.error(f"{error}")
 
             else:
                 st.session_state['logged_in'] = True
@@ -114,7 +116,7 @@ elif st.session_state['stage'] == "setup":
 elif st.session_state['stage'] == "playing":
     playing()
 elif st.session_state['stage'] == "boss_fight":
-    pass
+    boss_fight()
 elif st.session_state['stage'] == "end":
     pass
 else:

@@ -190,3 +190,73 @@ Outcome Rules (based on difficulty)
   }
 }
 """
+
+CHAPTER_THREE_PROMPT = """
+You are a third prompt that is used to generate the next chapter of the story.
+You will be given the same system prompt as before, but you will also be given the previous two chapters of the story.
+**Objective:** Transform a specific lesson or subject into an immersive, second-person ("you") narrative where the player must master a concept to overcome an obstacle and progress.
+
+**Core Directives:**
+* **The Hook:** Open with immediate action or high-tension mystery to grab attention.
+* **Natural Pedagogy:** Do not "lecture." Integrate the educational content into the environment, ancient texts, or NPC dialogue so it feels like a clue, not a textbook.
+* **The Mastery Gate:** The story must culminate in a challenge where the choices represent different applications of the learned concept. Only the correct application allows for a "successful" continuation.
+* **Tone & Style:** Cinematic, energetic, and age-appropriate for teens. Avoid patronizing language; lean into "Young Adult" fiction vibes (e.g., Percy Jackson, Maze Runner).
+* **Safety:** Maintain a PG-13 rating. High stakes and peril are encouraged, but avoid graphic violence or explicit content.
+
+**Constraint Checklist:**
+1.  **Perspective:** Always write in the second person.
+2.  **Engagement:** Every story segment must end on a choice or a cliffhanger.
+3.  **Utility:** Ensure the `lesson` field clearly summarizes the core takeaway.
+4.  **Format:** You must **only** output valid JSON. Do not include conversational filler or markdown outside the JSON block.
+
+**Required JSON Output Schema:**
+```json
+{
+  "title": "A short, punchy title for the chapter",
+  "story": "The narrative text, including the hook and the natural explanation of the concept.",
+  "lesson": "A 1-2 sentence summary of the academic concept taught.",
+  "objective": "The specific task the player must complete to move forward.",
+  "choices": [
+    "Option 1 (Applying the lesson)",
+    "Option 2 (Common misconception/error)",
+    "Option 3 (Alternative approach/error)"
+  ]
+}
+```
+
+### Example Response (Internal Reference)
+```json
+{
+  "title": "The Vault of the Sun King",
+  "story": "Sweat stings your eyes as you stare at the massive stone door deep within the Mayan ruins. To open it, you must align the solar mirrors. You notice a mural showing light bouncing off a surface; a weathered inscription reads: 'The light leaves as it arrived.' You realize this refers to the Law of Reflection: the angle of incidence equals the angle of reflection. If the sunbeam hits the first mirror at a 30-degree angle, it will bounce off at that exact same angle toward the next sensor.",
+  "lesson": "The Law of Reflection states that the angle of incidence is equal to the angle of reflection.",
+  "objective": "Calculate the correct mirror alignment to strike the final sensor.",
+  "choices": [
+    "Set the mirror to reflect at exactly 30 degrees.",
+    "Adjust the mirror to a wider 60-degree angle to cover more ground.",
+    "Aim the mirror directly at the floor to find a secondary path."
+  ]
+}
+
+
+You are a second prompt that is used to generate the next chapter of the story.
+You will be given the same system prompt as before, but you will also be given the previous chapter of the story.
+You must use the previous chapter of the story to generate the next chapter of the story. 
+You must also ensure that the next chapter of the story is consistent with the previous chapter of the story. 
+You must also ensure that the next chapter of the story is engaging and interesting. 
+You must also ensure that the next chapter of the story is educational and teaches the user something new. 
+You must also ensure that the next chapter of the story is in line with the genre that was specified by the user.
+this is a example of one of the chapters make look like:
+{
+"title":"The Circuit Codex"
+"story":"You've always wondered what grand secrets lay buried within the old electronics workshop at the edge of your neighborhood. Today, the air is tingling with mystery as you find yourself inside, the dusty smell of ancient machines filling the air. Your eyes land on a peculiar device, a dusty circuit board with tangled wires and faded keys. Inscribed on the wall behind it, a cryptic message reads: 'The heart of the machine beats in binary, every 0 and 1, a pulse of power.' Instinctively, you recall that computers interpret instructions through binary code, where everything is expressed as a series of 0s and 1s. To unlock the secrets of this machine, you must input the correct binary sequence."
+"lesson":"Binary code is the language of computers, using combinations of 0s and 1s to represent data and execute instructions."
+"objective":"Choose the correct binary sequence to activate the ancient machine."
+"choices":[
+0:"Input the sequence '1010' to initiate the configuration."
+1:"Use '2020' as a guess since it's an important year."
+2:"Try '1111', believing it's a common reset code."
+]
+}
+
+"""

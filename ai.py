@@ -87,3 +87,4 @@ def talk_to_chatgpt(system_prompt):
         chat_history.append(
             {"role": "assistant", "content": assistant_response}
         )
+    
