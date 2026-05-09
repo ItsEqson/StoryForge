@@ -1,4 +1,5 @@
 import streamlit as st
+from Pages.end2 import boss_end_stage
 from Pages.boss_fight import boss_fight
 from Pages.end import player_end_stage
 from Pages.playing import playing
@@ -121,7 +122,7 @@ elif st.session_state['stage'] == "boss_fight":
 elif st.session_state['stage'] == "player_end_stage":
     player_end_stage()
 elif st.session_state['stage'] == "boss_end_stage":
-    
+    boss_end_stage()
 else:
     generate()
 
