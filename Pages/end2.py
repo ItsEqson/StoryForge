@@ -9,5 +9,5 @@ def boss_end_stage():
 
     if st.button("Try Again"):
         st.session_state.clear()
-        st.session_state["stage"] = "generate"
+        st.session_state["stage"] = "setup"
         st.rerun()
