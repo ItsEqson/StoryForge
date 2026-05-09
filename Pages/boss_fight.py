@@ -1,10 +1,7 @@
 from Pages.prompts import CHAPTER_ONE_PROMPT, CHAPTER_TWO_PROMPT, CHAPTER_THREE_PROMPT, BOSS_FIGHT_PROMPT
 import streamlit as st
 from ai import get_json_response
-
 import random
-import streamlit as st
-from ai import get_json_response
 
 
 def generate_boss_turn():
@@ -96,11 +93,14 @@ def boss_fight():
                 st.session_state["player_hp"] -= 20
 
             if st.session_state["boss_hp"] <= 0:
-                st.success("🎉 You defeated the boss!")
-                st.balloons()
+                st.session_state["battle_result"] = "win"
+                st.session_state["stage"] = "end_stage"
+                st.rerun()
 
             elif st.session_state["player_hp"] <= 0:
-                st.error("💀 You lost the boss fight. Try again!")
+                st.session_state["battle_result"] = "lose"
+                st.session_state["stage"] = "end_stage"
+                st.rerun()
 
             else:
                 st.session_state["boss_turn"] += 1
