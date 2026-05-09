@@ -1,6 +1,6 @@
 import streamlit as st
 from Pages.boss_fight import boss_fight
-from Pages.end import end_stage
+from Pages.end import player_end_stage
 from Pages.playing import playing
 from Pages.generate import generate
 from Pages.home import home
@@ -22,7 +22,7 @@ def initialize_state():
     if 'current_user_id' not in st.session_state:
         st.session_state['current_user_id'] = None
     if 'stage' not in st.session_state:
-        st.session_state['stage'] = "None" # setup stage, playing stage, boss stages, end stage
+        st.session_state['stage'] = "None" # setup stage, playing stage, boss stages, boss end stage, player end stage
     if 'turn_count' not in st.session_state:
         st.session_state['turn_count'] = 0
     if 'history' not in st.session_state:
@@ -118,8 +118,10 @@ elif st.session_state['stage'] == "playing":
     playing()
 elif st.session_state['stage'] == "boss_fight":
     boss_fight()
-elif st.session_state['stage'] == "end":
-    end_stage()
+elif st.session_state['stage'] == "player_end_stage":
+    player_end_stage()
+elif st.session_state['stage'] == "boss_end_stage":
+    
 else:
     generate()
 

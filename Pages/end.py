@@ -1,7 +1,7 @@
 import streamlit as st
 
 
-def end_stage():
+def player_end_stage():
     result = st.session_state.get("battle_result", "")
 
     if result == "win":

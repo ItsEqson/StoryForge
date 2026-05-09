@@ -94,12 +94,12 @@ def boss_fight():
 
             if st.session_state["boss_hp"] <= 0:
                 st.session_state["battle_result"] = "win"
-                st.session_state["stage"] = "end_stage"
+                st.session_state["stage"] = "player_end_stage"
                 st.rerun()
 
             elif st.session_state["player_hp"] <= 0:
                 st.session_state["battle_result"] = "lose"
-                st.session_state["stage"] = "end_stage"
+                st.session_state["stage"] = "boss_end_stage"
                 st.rerun()
 
             else:
