@@ -30,7 +30,7 @@ def get_standard_response(system_prompt, user_prompt):
 def get_json_response(system_prompt, user_prompt):
 
     response = client.chat.completions.create(
-        model="gpt-4o",
+        model="gpt-5.4-nano-2026-03-17",
         response_format={ "type": "json_object" },
         messages=[
             {"role": "system", "content": system_prompt},
