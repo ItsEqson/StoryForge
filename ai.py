@@ -28,17 +28,7 @@ def get_standard_response(system_prompt, user_prompt):
     return response.choices[0].message.content
 
 def get_json_response(system_prompt, user_prompt):
-    """
-    Sends a prompt to the ChatGPT API where it will return a JSON response.
-    ChatGPT will not remember any prior conversations.
 
-    Parameters:
-    - system_prompt (str): Directions on how ChatGPT should act. Remember that it must request for a JSON response and include a JSON template.
-    - user_prompt (str): A prompt from the user.
-    
-    Returns:
-    - (dict): A dictionary containing ChatGPT's response in the requested JSON format.
-    """
     response = client.chat.completions.create(
         model="gpt-4o",
         response_format={ "type": "json_object" },

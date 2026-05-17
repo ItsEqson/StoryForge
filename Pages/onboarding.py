@@ -4,7 +4,7 @@ from db import save_profile
 def onboarding():
     with st.form("onboarding_form"):
         name = st.text_input("Enter your name")
-        email = st.text_input("Enter Email")
+        email = st.session_state['current_user']
         Gender = st.radio("Gender", ["Boy", "Girl"])
         age = st.slider("Enter Age")
         submitted = st.form_submit_button("Submit")
